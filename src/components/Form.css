@@ -1,0 +1,20 @@
+.Card {
+    width: 400px;
+}
+
+.CardTitle {
+    background-color: #0775A8;
+    font-weight: bold;
+}
+
+.CardTitle span {
+    color : #ffffff !important;
+}
+
+button {
+    background-color: #0775A8;
+}
+
+button span {
+    color : #ffffff !important;
+}
