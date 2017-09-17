@@ -6,6 +6,10 @@ This project is **not** an example on how to create a Form in React. I just want
 
 I made the verifications by hand but I could have use: [React-form](https://github.com/tannerlinsley/react-form)
 
+# Demo !!
+
+You can try the project right here: https://tbille.github.io/react-form/
+
 ## Components
 * **Account:** displays the result
 * **Form:** verification for the values
