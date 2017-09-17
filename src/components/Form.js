@@ -46,6 +46,7 @@ class Form extends Component {
 
     this.submitAccount = this.submitAccount.bind(this);
     this.onFirstNameUpdate = this.onFirstNameUpdate.bind(this);
+    this.onLastNameUpdate = this.onLastNameUpdate.bind(this);
   }
 
   submitAccount() {
@@ -59,7 +60,7 @@ class Form extends Component {
       for(var key in this.state.user) {
         let value = this.state.user[key];
         if(!this.state.user[key].isValid) {
-          value.errorText = 'This field is mandatory.';
+          value.errorText = 'This field is required.';
         }
         user[key] = value;
       }
@@ -87,6 +88,26 @@ class Form extends Component {
     this.setState(user);
   }
 
+  onLastNameUpdate(newValue) {
+    const user = this.state.user;
+
+    if(newValue === this.state.firstname.value) {
+      user['lastname'] = {
+        value: newValue,
+        isValid: true,
+        errorText: ''
+      };
+    } else {
+      user['lastname'] = {
+        value: newValue,
+        isValid: false,
+        errorText: 'Last name should be the same as the first name'
+      };
+    }
+
+    this.setState(user);
+  }
+
   render() {
     return (
       <div className="Form">
@@ -95,7 +116,7 @@ class Form extends Component {
           <CardText>
             <form>
               <Firstname firstname={this.state.user.firstname} onUpdate={this.onFirstNameUpdate}></Firstname><br />
-              <Lastname></Lastname><br />
+              <Lastname lastname={this.state.user.lastname} onUpdate={this.onLastNameUpdate}></Lastname><br />
               <Username></Username><br />
               <Password></Password><br />
               <Email></Email><br />
