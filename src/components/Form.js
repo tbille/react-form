@@ -48,6 +48,7 @@ class Form extends Component {
     this.onFirstNameUpdate = this.onFirstNameUpdate.bind(this);
     this.onLastNameUpdate = this.onLastNameUpdate.bind(this);
     this.onUserNameUpdate = this.onUserNameUpdate.bind(this);
+    this.onPasswordUpdate = this.onPasswordUpdate.bind(this);
   }
 
   submitAccount() {
@@ -129,6 +130,26 @@ class Form extends Component {
     this.setState(user);
   }
 
+  onPasswordUpdate(newValue) {
+    const user = this.state.user;
+
+    if(newValue.length >= 8) {
+      user['password'] = {
+        value: newValue,
+        isValid: true,
+        errorText: ''
+      };
+    } else {
+      user['password'] = {
+        value: newValue,
+        isValid: false,
+        errorText: 'Password should be at least 8 characters long.'
+      };
+    }
+
+    this.setState(user);
+  }
+
   render() {
     return (
       <div className="Form">
@@ -139,7 +160,7 @@ class Form extends Component {
               <Firstname firstname={this.state.user.firstname} onUpdate={this.onFirstNameUpdate}></Firstname><br />
               <Lastname lastname={this.state.user.lastname} onUpdate={this.onLastNameUpdate}></Lastname><br />
               <Username username={this.state.user.username} onUpdate={this.onUserNameUpdate}></Username><br />
-              <Password></Password><br />
+              <Password password={this.state.user.password} onUpdate={this.onPasswordUpdate}></Password><br />
               <Email></Email><br />
               <p>
                   By clicking Submit, I agree that I have read and accepted the <a href="#/">Terms and Conditions</a>.
