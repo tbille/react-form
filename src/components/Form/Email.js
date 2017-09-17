@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import './Form.css';
-
 import TextField from 'material-ui/TextField';
 
 class Email extends Component {

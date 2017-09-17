@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import {CardActions} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import validator from 'validator'
+
 import './Form.css';
 import Firstname from './Firstname'
 import Lastname from './Lastname'
@@ -6,15 +10,11 @@ import Username from './Username'
 import Password from './Password'
 import Email from './Email'
 
-
-import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import validator from 'validator'
-
 class Form extends Component {
   constructor(props) {
     super(props);
 
+    this.handleResult = props.handleResult;
     this.state = {
       user: {
         firstname: {
@@ -53,19 +53,23 @@ class Form extends Component {
     this.onEmailUpdate = this.onEmailUpdate.bind(this);
   }
 
-  submitAccount() {
-    if(this.state.user.firstname.isValid
+  isValid() {
+    return this.state.user.firstname.isValid
       && this.state.user.lastname.isValid
       && this.state.user.username.isValid
       && this.state.user.password.isValid
-      && this.state.user.email.isValid) {
-        alert(
-          'First Name: ' + this.state.user.firstname.value + '\n'
-          + 'Last Name: ' + this.state.user.lastname.value + '\n'
-          + 'Username: ' + this.state.user.username.value + '\n'
-          + 'Password: ' + this.state.user.password.value + '\n'
-          + 'Email: ' + this.state.user.email.value + '\n'
-        );
+      && this.state.user.email.isValid;
+  }
+
+  submitAccount() {
+    if(this.isValid()) {
+      this.handleResult(
+        this.state.user.firstname.value,
+        this.state.user.lastname.value,
+        this.state.user.username.value,
+        this.state.user.password.value,
+        this.state.user.email.value
+      );
     } else {
       let user = {};
       for(var key in this.state.user) {
@@ -182,28 +186,23 @@ class Form extends Component {
   render() {
     return (
       <div className="Form">
-        <Card>
-          <CardTitle className="CardTitle" title="Create Your Free Account" />
-          <CardText>
-            <form>
-              <Firstname firstname={this.state.user.firstname} onUpdate={this.onFirstNameUpdate}></Firstname><br />
-              <Lastname lastname={this.state.user.lastname} onUpdate={this.onLastNameUpdate}></Lastname><br />
-              <Username username={this.state.user.username} onUpdate={this.onUserNameUpdate}></Username><br />
-              <Password password={this.state.user.password} onUpdate={this.onPasswordUpdate}></Password><br />
-              <Email email={this.state.user.email} onUpdate={this.onEmailUpdate}></Email><br />
-              <p>
-                  By clicking Submit, I agree that I have read and accepted the <a href="#/">Terms and Conditions</a>.
-              </p>
-              <CardActions>
-                <FlatButton
-                  backgroundColor="#0775A8"
-                  onClick={this.submitAccount}
-                  label="Submit">
-                </FlatButton>
-              </CardActions>
-            </form>
-          </CardText>
-        </Card>
+        <form>
+          <Firstname firstname={this.state.user.firstname} onUpdate={this.onFirstNameUpdate}></Firstname><br />
+          <Lastname lastname={this.state.user.lastname} onUpdate={this.onLastNameUpdate}></Lastname><br />
+          <Username username={this.state.user.username} onUpdate={this.onUserNameUpdate}></Username><br />
+          <Password password={this.state.user.password} onUpdate={this.onPasswordUpdate}></Password><br />
+          <Email email={this.state.user.email} onUpdate={this.onEmailUpdate}></Email><br />
+          <p>
+              By clicking Submit, I agree that I have read and accepted the <a href="#/">Terms and Conditions</a>.
+          </p>
+          <CardActions>
+            <FlatButton
+              backgroundColor="#0775A8"
+              onClick={this.submitAccount}
+              label="Submit">
+            </FlatButton>
+          </CardActions>
+        </form>
       </div>
     );
   }

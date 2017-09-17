@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import './Form.css';
-
 import TextField from 'material-ui/TextField';
 
-class Lastname extends Component {
+class Password extends Component {
 
   constructor(props) {
     super(props);
@@ -17,14 +15,14 @@ class Lastname extends Component {
 
   render() {
     return (
-      <div className="Lastname">
+      <div className="Password">
         <label>
-        Last Name:<br />
-        <TextField name="lastname" errorText={this.props.lastname.errorText} onChange={this.handleChange}/>
+            Password:<br />
+            <TextField name="password" type="password" errorText={this.props.password.errorText} onChange={this.handleChange}/>
         </label>
       </div>
     );
   }
 }
 
-export default Lastname;
+export default Password;
