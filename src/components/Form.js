@@ -9,6 +9,7 @@ import Email from './Email'
 
 import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import validator from 'validator'
 
 class Form extends Component {
   constructor(props) {
@@ -49,6 +50,7 @@ class Form extends Component {
     this.onLastNameUpdate = this.onLastNameUpdate.bind(this);
     this.onUserNameUpdate = this.onUserNameUpdate.bind(this);
     this.onPasswordUpdate = this.onPasswordUpdate.bind(this);
+    this.onEmailUpdate = this.onEmailUpdate.bind(this);
   }
 
   submitAccount() {
@@ -150,6 +152,26 @@ class Form extends Component {
     this.setState(user);
   }
 
+  onEmailUpdate(newValue) {
+    const user = this.state.user;
+
+    if(validator.isEmail(newValue)) {
+      user['email'] = {
+        value: newValue,
+        isValid: true,
+        errorText: ''
+      };
+    } else {
+      user['email'] = {
+        value: newValue,
+        isValid: false,
+        errorText: 'Email should be a valid email address'
+      };
+    }
+
+    this.setState(user);
+  }
+
   render() {
     return (
       <div className="Form">
@@ -161,7 +183,7 @@ class Form extends Component {
               <Lastname lastname={this.state.user.lastname} onUpdate={this.onLastNameUpdate}></Lastname><br />
               <Username username={this.state.user.username} onUpdate={this.onUserNameUpdate}></Username><br />
               <Password password={this.state.user.password} onUpdate={this.onPasswordUpdate}></Password><br />
-              <Email></Email><br />
+              <Email email={this.state.user.email} onUpdate={this.onEmailUpdate}></Email><br />
               <p>
                   By clicking Submit, I agree that I have read and accepted the <a href="#/">Terms and Conditions</a>.
               </p>
