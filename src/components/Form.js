@@ -47,6 +47,7 @@ class Form extends Component {
     this.submitAccount = this.submitAccount.bind(this);
     this.onFirstNameUpdate = this.onFirstNameUpdate.bind(this);
     this.onLastNameUpdate = this.onLastNameUpdate.bind(this);
+    this.onUserNameUpdate = this.onUserNameUpdate.bind(this);
   }
 
   submitAccount() {
@@ -108,6 +109,26 @@ class Form extends Component {
     this.setState(user);
   }
 
+  onUserNameUpdate(newValue) {
+    const user = this.state.user;
+
+    if(/^[a-z._]+$/.test(newValue)) {
+      user['username'] = {
+        value: newValue,
+        isValid: true,
+        errorText: ''
+      };
+    } else {
+      user['username'] = {
+        value: newValue,
+        isValid: false,
+        errorText: 'Username should only contain small letters, the "." and the "_" characters.'
+      };
+    }
+
+    this.setState(user);
+  }
+
   render() {
     return (
       <div className="Form">
@@ -117,7 +138,7 @@ class Form extends Component {
             <form>
               <Firstname firstname={this.state.user.firstname} onUpdate={this.onFirstNameUpdate}></Firstname><br />
               <Lastname lastname={this.state.user.lastname} onUpdate={this.onLastNameUpdate}></Lastname><br />
-              <Username></Username><br />
+              <Username username={this.state.user.username} onUpdate={this.onUserNameUpdate}></Username><br />
               <Password></Password><br />
               <Email></Email><br />
               <p>
