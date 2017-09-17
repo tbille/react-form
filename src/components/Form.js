@@ -59,6 +59,13 @@ class Form extends Component {
       && this.state.user.username.isValid
       && this.state.user.password.isValid
       && this.state.user.email.isValid) {
+        alert(
+          'First Name: ' + this.state.user.firstname.value + '\n'
+          + 'Last Name: ' + this.state.user.lastname.value + '\n'
+          + 'Username: ' + this.state.user.username.value + '\n'
+          + 'Password: ' + this.state.user.password.value + '\n'
+          + 'Email: ' + this.state.user.email.value + '\n'
+        );
     } else {
       let user = {};
       for(var key in this.state.user) {
