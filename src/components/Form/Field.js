@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 
-class Email extends Component {
+class Field extends Component {
 
   constructor(props) {
     super(props);
@@ -15,14 +15,14 @@ class Email extends Component {
 
   render() {
     return (
-      <div className="Email">
+      <div className="Field">
         <label>
-            Email:<br />
-            <TextField name="email" errorText={this.props.email.errorText} onChange={this.handleChange}/>
+          {this.props.label}:<br />
+          <TextField name={this.props.label} type={this.props.type} errorText={this.props.data.errorText} onChange={this.handleChange}/>
         </label>
       </div>
     );
   }
 }
 
-export default Email;
+export default Field;

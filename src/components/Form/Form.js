@@ -4,11 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import validator from 'validator'
 
 import './Form.css';
-import Firstname from './Firstname'
-import Lastname from './Lastname'
-import Username from './Username'
-import Password from './Password'
-import Email from './Email'
+import Field from './Field'
 
 class Form extends Component {
   constructor(props) {
@@ -187,11 +183,11 @@ class Form extends Component {
     return (
       <div className="Form">
         <form>
-          <Firstname firstname={this.state.user.firstname} onUpdate={this.onFirstNameUpdate}></Firstname><br />
-          <Lastname lastname={this.state.user.lastname} onUpdate={this.onLastNameUpdate}></Lastname><br />
-          <Username username={this.state.user.username} onUpdate={this.onUserNameUpdate}></Username><br />
-          <Password password={this.state.user.password} onUpdate={this.onPasswordUpdate}></Password><br />
-          <Email email={this.state.user.email} onUpdate={this.onEmailUpdate}></Email><br />
+          <Field label="First Name" data={this.state.user.firstname} onUpdate={this.onFirstNameUpdate}></Field><br />
+          <Field label="Last Name" data={this.state.user.lastname} onUpdate={this.onLastNameUpdate}></Field><br />
+          <Field label="Username" data={this.state.user.username} onUpdate={this.onUserNameUpdate}></Field><br />
+          <Field label="Password" type="password" data={this.state.user.password} onUpdate={this.onPasswordUpdate}></Field><br />
+          <Field label="Email" data={this.state.user.email} onUpdate={this.onEmailUpdate}></Field><br />
           <p>
               By clicking Submit, I agree that I have read and accepted the <a href="#/">Terms and Conditions</a>.
           </p>

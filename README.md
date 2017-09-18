@@ -11,9 +11,9 @@ I made the verifications by hand but I could have use: [React-form](https://gith
 You can try the project right here: https://tbille.github.io/react-form/
 
 ## Components
-* **Account:** displays the result
-* **Form:** verification for the values
-* **Firstname, Lastname, Username, Password, Email:** Small components to test components
+* **Account:** Displays the form and the result after submition
+* **Form:** Component that displays the fields and verifies their content
+* **Field:** Fields for First Name, Last Name, Username, Password, Email
 
 ## Screenshots
 
