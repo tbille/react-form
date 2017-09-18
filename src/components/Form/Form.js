@@ -42,8 +42,7 @@ class Form extends Component {
     };
 
     this.submitAccount = this.submitAccount.bind(this);
-    this.onFirstNameUpdate = this.onFirstNameUpdate.bind(this);
-    this.onLastNameUpdate = this.onLastNameUpdate.bind(this);
+    this.onFirstLastNameUpdate = this.onFirstLastNameUpdate.bind(this);
     this.onUserNameUpdate = this.onUserNameUpdate.bind(this);
     this.onPasswordUpdate = this.onPasswordUpdate.bind(this);
     this.onEmailUpdate = this.onEmailUpdate.bind(this);
@@ -79,40 +78,20 @@ class Form extends Component {
     }
   }
 
-  onFirstNameUpdate(newValue) {
+  onFirstLastNameUpdate(newValue, field) {
     const user = this.state.user;
 
     if(/^[a-zA-Z]+$/.test(newValue)) {
-      user['firstname'] = {
+      user[field] = {
         value: newValue,
         isValid: true,
         errorText: ''
       };
     } else {
-      user['firstname'] = {
+      user[field] = {
         value: newValue,
         isValid: false,
-        errorText: 'Firstname should only contain capital or small letters'
-      };
-    }
-
-    this.setState(user);
-  }
-
-  onLastNameUpdate(newValue) {
-    const user = this.state.user;
-
-    if(newValue === this.state.firstname.value) {
-      user['lastname'] = {
-        value: newValue,
-        isValid: true,
-        errorText: ''
-      };
-    } else {
-      user['lastname'] = {
-        value: newValue,
-        isValid: false,
-        errorText: 'Last name should be the same as the first name'
+        errorText: 'It should only contain capital or small letters'
       };
     }
 
@@ -183,11 +162,11 @@ class Form extends Component {
     return (
       <div className="Form">
         <form>
-          <Field label="First Name" data={this.state.user.firstname} onUpdate={this.onFirstNameUpdate}></Field><br />
-          <Field label="Last Name" data={this.state.user.lastname} onUpdate={this.onLastNameUpdate}></Field><br />
-          <Field label="Username" data={this.state.user.username} onUpdate={this.onUserNameUpdate}></Field><br />
+          <Field label="First Name" type="firstname" data={this.state.user.firstname} onUpdate={this.onFirstLastNameUpdate}></Field><br />
+          <Field label="Last Name" type="lastname" data={this.state.user.lastname} onUpdate={this.onFirstLastNameUpdate}></Field><br />
+          <Field label="Username" type="username" data={this.state.user.username} onUpdate={this.onUserNameUpdate}></Field><br />
           <Field label="Password" type="password" data={this.state.user.password} onUpdate={this.onPasswordUpdate}></Field><br />
-          <Field label="Email" data={this.state.user.email} onUpdate={this.onEmailUpdate}></Field><br />
+          <Field label="Email" type="email" data={this.state.user.email} onUpdate={this.onEmailUpdate}></Field><br />
           <p>
               By clicking Submit, I agree that I have read and accepted the <a href="#/">Terms and Conditions</a>.
           </p>

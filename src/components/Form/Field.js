@@ -10,7 +10,7 @@ class Field extends Component {
   }
 
   handleChange(event, newValue) {
-    this.props.onUpdate(newValue);
+    this.props.onUpdate(newValue, this.props.type);
   }
 
   render() {
